@@ -1,47 +1,38 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
 import Cookies from "js-cookie";
 import "./App.css";
-import signUp from "./assets/pages/SignUp";
+import logo from "./assets/images/logo.png";
+
+//Pages
+import SignUp from "./pages/SignUp";
+
+//component
+import Header from "./component/TheHeader";
 
 function App() {
-  const signUp = () => {
-    const navigate = useNavigate();
+  // State dans lequel je stocke le token. Sa valeur de base sera :
+  // - Si je trouve un cookie token, ce cookie
+  // - Sinon, null
+  const [token, setToken] = useState(Cookies.get("vinted-token") || null);
+  const handleToken = (token) => {
+    if (token) {
+      Cookies.set("vinted-token", token, { expires: 15 });
+      setToken(token);
+    } else {
+      Cookies.remove("vinted-token");
+      setToken(null);
+    }
   };
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(
-          `https://lereacteur-vinted-api.herokuapp.com/user/signup`
-        );
-        console.log(response.data);
-        setData(response.data);
-        setLoading(false);
-        Cookies.set("userToken", response.data.token);
-        setToken(response.data.token);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  });
 
-  return loading ? (
-    <p>Loading...</p>
-  ) : (
-    <>
-      <main>
-        <div>
-          <h2>SignUp page</h2>
-          <button onClick={() => navigate("/")}>Go to SignUp</button>
-        </div>
-      </main>
-    </>
+  return (
+    <Router>
+      {/*Je peux passer des props à mes composants*/}
+      <Header token={token} handleToken={handleToken} />
+      <Routes>
+        <Route path="/SignUp" element={<SignUp handleToken={handleToken} />} />
+      </Routes>
+    </Router>
   );
 }
 
