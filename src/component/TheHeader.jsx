@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import logo from "./assets/images/logo.png";
 
 // Je récupère en props le statye token et la fonction handleToken

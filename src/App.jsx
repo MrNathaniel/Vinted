@@ -2,7 +2,6 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./App.css";
-import logo from "./assets/images/logo.png";
 
 //Pages
 import SignUp from "./pages/SignUp";
