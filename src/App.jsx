@@ -5,6 +5,7 @@ import "./App.css";
 
 //Pages
 import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 //component
 import Header from "./component/TheHeader";
@@ -14,6 +15,7 @@ function App() {
   // - Si je trouve un cookie token, ce cookie
   // - Sinon, null
   const [token, setToken] = useState(Cookies.get("vinted-token") || null);
+  const [search, setSearch] = useState("");
   const handleToken = (token) => {
     if (token) {
       Cookies.set("vinted-token", token, { expires: 15 });
@@ -27,9 +29,16 @@ function App() {
   return (
     <Router>
       {/*Je peux passer des props à mes composants*/}
-      <Header token={token} handleToken={handleToken} />
+      <Header
+        token={token}
+        search={search}
+        handleToken={handleToken}
+        setSearch={setSearch}
+      />
+
       <Routes>
         <Route path="/SignUp" element={<SignUp handleToken={handleToken} />} />
+        <Route path="/Login" element={<Login handleToken={handleToken} />} />
       </Routes>
     </Router>
   );

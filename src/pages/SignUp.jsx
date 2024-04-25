@@ -5,7 +5,7 @@ import axios from "axios";
 // Je récupère la fonction handleToken en props
 const SignUp = ({ handleToken }) => {
   //states qui gèrent mes inputs
-  const [UserName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsLetter, setNewsLetter] = useState(false);
@@ -32,7 +32,7 @@ const SignUp = ({ handleToken }) => {
           email: email,
           username: username,
           password: password,
-          newsletter: newsletter,
+          newsletter: newsLetter,
         }
       );
       console.log("===> la réponse", response.data);
@@ -47,59 +47,59 @@ const SignUp = ({ handleToken }) => {
       // si je reçois le status 409
       if (error.response.status === 409) {
         // Je met à jour mon state errorMessage
-        setErrorMessagez(
+        setErrorMessage(
           "This email already has an account, please use another one"
         );
       } else if (error.response.data.message === "Missing parameters") {
         setErrorMessage("Please fill in all the fields");
       }
     }
-
-    return (
-      <main>
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nom d'utilisateur"
-            name="username"
-            value={username}
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-          />
-          <input
-            type="email"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            name="password"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-          <input
-            checked={newsletter}
-            type="checkbox"
-            onChange={() => {
-              setNewsLetter(!newsletter);
-            }}
-          />
-          <input type="submit" value="s'inscrire" />
-          {errorMessage && <p style={{ color: "red" }}> {errorMessage}</p>}
-        </form>
-        <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
-      </main>
-    );
   };
+
+  return (
+    <main>
+      <h1>Sign up</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Nom d'utilisateur"
+          name="username"
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+        />
+        <input
+          type="email"
+          placeholder="email"
+          name="email"
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          name="password"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+        />
+        <input
+          checked={newsLetter}
+          type="checkbox"
+          onChange={() => {
+            setNewsLetter(!newsLetter);
+          }}
+        />
+        <input type="submit" value="s'inscrire" />
+        {errorMessage && <p style={{ color: "red" }}> {errorMessage}</p>}
+      </form>
+      <Link to="/login">Tu as déjà un compte ? Connecte-toi !</Link>
+    </main>
+  );
 };
 
 export default SignUp;

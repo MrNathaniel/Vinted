@@ -4,10 +4,43 @@
 
 main {
   background-color: #ffffff;
+  /*display: flex;
+  flex-direction: row;*/
 }
 
-.Header {
+Header {
   height: 55px;
-  width: 100%;
-  border-bottom: lightgray 2px;
+  width: 1920px;
+  border-bottom: solid lightgray 1px;
+  /*border: red solid 2px;*/
+}
+
+img {
+  margin-left: 340px;
+}
+
+.signup {
+  width: 100px;
+  height: 20px;
+  background-color: #ffffff;
+  border: solid 1px #007580;
+  color: #007580;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.connect {
+  width: 100px;
+  height: 20px;
+  background-color: #ffffff;
+  border: solid 1px #007580;
+  color: #007580;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: 20px;
+
+  margin-right: 200px;
 }
